@@ -23,8 +23,8 @@ class AuthController extends Controller
         if (!$user) {
             return response()->json(['message' => 'Invalid credentials'], 401);
         }
-
-        if ($user->password !== $credentials['password']) {
+        //Vérifie si le mot de passe fourni correspond au mot de passe hashé stocké
+        if (!Hash::check($credentials['password'], $user->password)) {
             return response()->json(['message' => 'Invalid credentials'], 401);
         }
 
@@ -52,7 +52,7 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
-            'password' => $validated['password'],
+            'password' => Hash::make($validated['password']), // Mot de passe hashé avec bcrypt avant d'être stocké
         ]);
 
         return response()->json([
