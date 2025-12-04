@@ -93,6 +93,10 @@ class ArticleController extends Controller
          *   - La table et les données ne sont pas modifiées.
          *   - MySQL doit supporter la collation utf8mb4_unicode_ci.
          */
+
+        /**
+         * l'ajout de la requête preparer avec ? un placeholder ? et un binding de paramètres, ce qui transforme la requête en requête préparée sécurisée.
+         */
         $articles = DB::select("
         SELECT * FROM articles
         WHERE CONVERT(title USING utf8mb4) COLLATE utf8mb4_unicode_ci LIKE ?", ["%$query%"]);
