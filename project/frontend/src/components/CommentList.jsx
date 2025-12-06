@@ -76,10 +76,8 @@ function CommentList({ articleId }) {
                 position: 'relative'
               }}
             >
-              <div 
-                dangerouslySetInnerHTML={{ __html: comment.content }}
-                style={{ marginBottom: '0.5rem' }}
-              />
+              {/* dangerouslySetInnerHTML injecte directement du HTML dans le DOM,si comment.content contient <img onerror=...> le navigateur l’exécutera. */}
+              <p style={{ marginBottom: '0.5rem' }}>{comment.content}</p>
               
               <div style={{ fontSize: '0.85em', color: '#7f8c8d' }}>
                 — {comment.user?.name || 'Utilisateur'}

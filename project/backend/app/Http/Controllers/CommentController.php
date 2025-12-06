@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Mews\Purifier\Facades\Purifier;
+
 
 class CommentController extends Controller
 {
@@ -20,7 +22,7 @@ class CommentController extends Controller
 
         return response()->json($comments);
     }
-
+    
     /**
      * Store a new comment.
      */
@@ -31,7 +33,8 @@ class CommentController extends Controller
             'user_id' => 'required|exists:users,id',
             'content' => 'required|string',
         ]);
-
+        //
+        $validated['content'] = Purifier::clean($validated['content'], 'myclean');
         $comment = Comment::create($validated);
         $comment->load('user');
 
@@ -49,7 +52,7 @@ class CommentController extends Controller
         $comment->delete();
 
         $remainingComments = Comment::where('article_id', $articleId)->get();
-        $firstComment = $remainingComments[0];
+        $firstComment = $remainingComments->first(); // first() au lieu de [0] safe, retourne null si aucun commentaire
 
         return response()->json([
             'message' => 'Comment deleted successfully',
