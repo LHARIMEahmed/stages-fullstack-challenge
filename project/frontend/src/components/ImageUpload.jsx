@@ -54,7 +54,7 @@ function ImageUpload() {
     <div className="card">
       <h3>📸 Upload d'Image</h3>
       <p style={{ color: '#7f8c8d', fontSize: '0.9em', marginBottom: '1rem' }}>
-        Testez l'upload d'images (limite : 2MB)
+        Testez l'upload d'images (limite : 20MB)
       </p>
 
       <div style={{ marginBottom: '1rem' }}>
