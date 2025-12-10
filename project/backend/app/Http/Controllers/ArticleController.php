@@ -96,7 +96,7 @@ class ArticleController extends Controller
          */
 
         /**
-         * l'ajout de la requête preparer avec ? un placeholder ? et un binding de paramètres, ce qui transforme la requête en requête préparée sécurisée.
+         * l'ajout de la requête preparer avec ? un placeholder ? et un binding de paramètres, ce qui transforme la requête en requête préparée sécurisée
          */
         $articles = DB::select("
         SELECT * FROM articles

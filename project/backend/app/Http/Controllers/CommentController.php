@@ -51,12 +51,12 @@ class CommentController extends Controller
 
         $comment->delete();
 
-        $remainingComments = Comment::where('article_id', $articleId)->get();
-        $firstComment = $remainingComments->first(); // first() au lieu de [0] safe, retourne null si aucun commentaire
-
+        $remainingComments2 = Comment::where('article_id', $articleId)->get();
+        
+        $firstComment = $remainingComments2->first(); // first() au lieu de [0] safe, retourne null si aucun commentaire , la deuxime modif, ,
         return response()->json([
             'message' => 'Comment deleted successfully',
-            'remaining_count' => $remainingComments->count(),
+            'remaining_count' => $remainingComments2->count(),
             'first_remaining' => $firstComment,
         ]);
     }
